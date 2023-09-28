@@ -1,3 +1,4 @@
+"""requirements.txt and requirements-dev.txt에 Python `Mirco버전`, `Systems 환경`까지 추가합니다."""
 import sys
 
 filenames = ["requirements.txt", "requirements-dev.txt"]
