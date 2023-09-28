@@ -2,6 +2,12 @@
 
 ***
 
+### 주요 버전
+* Python: `3.9.3`
+* Django: `3.2.20`
+* Django REST Framework: `3.14.0`
+* DBMS: MySQL (ver. `8.0.27`)
+
 ### 가상환경
 * virtual environment 생성/연동
 ```bash
@@ -153,3 +159,60 @@ backend-pre-task
 > python manage_legacy.py runserver --settings=conf.settings.development
 > python manage_legacy.py runserver --settings=conf.settings.production
 > ```
+
+***
+
+### DDL/Dummy-data SQL 반영 순서 (순서대로)
+1. `schema.sql` 전체 순차 적용 
+  * > MysqlWorkbench 사용경우 단축키:
+    > >  전체선택상태 ctrl + shift + enter
+2. `data.sql` 전체 순차 적용 
+  * > MysqlWorkbench 사용경우 단축키:
+    > >  전체선택상태 ctrl + shift + enter
+
+### ERD/DB Description
+> * ERD
+> > <img src="../db/Diagram-ER.png" alt="image-description" width="550" style="border: 2px solid #555; border-radius: 5px;"/>
+> * DB Description
+> > <img src="../db/Description-DB.png" alt="image-description" width="1450" style="border: 2px solid #555; border-radius: 5px;"/>
+
+### Create Database(File-based), Migrate DB(with Built-in migration files), Create superuser
+```bash
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+### Create django-app directory structure and Create django-app
+```bash
+cd <워크스페이스>/<프로젝트루트>
+mkdir mkdir <장고앱들 관리 디렉토리>\<장고앱이름>
+python .\manage.py startapp <장고앱이름> .\<장고앱들 관리 디렉토리>\<장고앱이름>
+```
+> 주소록 API라서 장고앱 `addressbook`이라고 명명
+> ```bash
+> mkdir apps\addressbook
+> python .\manage.py startapp addressbook .\apps\addressbook
+> ```
+
+### Create API-centric directory structure
+> ```bash
+> cd <워크스페이스>/<프로젝트루트>
+> mkdir api
+> mkdir api\v1
+> mkdir api\v1\<모델 클래스 이름>
+> mkdir api\v1\tests
+> ```
+> models.py의 `도메인` 별 폴더 생성
+> ```bash
+> mkdir api
+> mkdir api\v1
+> mkdir api\v1\contact
+> mkdir api\v1\label
+> mkdir api\v1\contact-label
+> ```
+
+### Create Project's output resources directory structure
+```bash
+cd <워크스페이스>/<프로젝트루트>
+mkdir .resouurces
+```
