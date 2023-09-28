@@ -9,3 +9,8 @@ __pycache__/
 
 # etc
 .swp
+
+# env
+*.env
+*.env.development
+*.env.production
