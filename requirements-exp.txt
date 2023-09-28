@@ -1,0 +1,8 @@
+mysqlclient
+Pillow
+jupyter
+pandas
+numpy
+tensorflow-gpu
+keras
+matplotlib
