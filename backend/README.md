@@ -185,14 +185,22 @@ python manage.py createsuperuser
 ### Create django-app directory structure and Create django-app
 ```bash
 cd <워크스페이스>/<프로젝트루트>
-mkdir mkdir <장고앱들 관리 디렉토리>\<장고앱이름>
+mkdir <장고앱들 관리 디렉토리>\<장고앱이름>
 python .\manage.py startapp <장고앱이름> .\<장고앱들 관리 디렉토리>\<장고앱이름>
 ```
-> 주소록 API라서 장고앱 `addressbook`이라고 명명
+> `주소록 API 관련`이므로 장고앱 `addressbook`이라고 명명
 > ```bash
 > mkdir apps\addressbook
 > python .\manage.py startapp addressbook .\apps\addressbook
 > ```
+> `apps.py` 파일의 `name` 속성값을 `apps.addressbook`으로 변경
+> 
+> `인증 API 관련` 장고앱은 `accounts`이라고 명명
+> ```bash
+> mkdir apps\accounts
+> python .\manage.py startapp accounts .\apps\accounts
+> ```
+> `apps.py` 파일의 `name` 속성값을 `apps.accounts`으로 변경
 
 ### Create API-centric directory structure
 > ```bash
@@ -214,5 +222,5 @@ python .\manage.py startapp <장고앱이름> .\<장고앱들 관리 디렉토�
 ### Create Project's output resources directory structure
 ```bash
 cd <워크스페이스>/<프로젝트루트>
-mkdir .resouurces
+mkdir .resources
 ```
