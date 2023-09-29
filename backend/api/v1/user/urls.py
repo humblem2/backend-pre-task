@@ -1,1 +1,8 @@
-"""TODO: 필요시 Contact Value-Object 관련 url 추가"""
+from django.urls import path
+
+from .views import RegisterView, LoginView
+
+urlpatterns = [
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
+]

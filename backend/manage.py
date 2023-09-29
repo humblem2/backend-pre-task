@@ -5,8 +5,7 @@ import sys
 from typing import Dict
 
 import pymysql
-from decouple import Config, RepositoryEnv
-from decouple import config
+from decouple import Config, config, RepositoryEnv
 from termcolor import colored
 
 from conf.settings.base import BASE_DIR
