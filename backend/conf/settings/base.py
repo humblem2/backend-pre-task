@@ -23,12 +23,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-4h(4(tkle+h!x*81b(r9!!z4jous7ld3!nwfx7ra^w39!z2vls'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,6 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third-party Apps
     # Custom Apps
+    'apps.addressbook',
+    'apps.accounts',
 ]
 
 # Middleware definition
@@ -83,7 +79,7 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# NOTE: 자식 설정 파일에서 오버라이딩
+# NOTE: 자식 설정 파일(settings/development.py, production.py)에서 오버라이딩
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -137,3 +133,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Managing DDL via SQL
 DDL_BY_SQL = True
+
+# Custom User Model
+AUTH_USER_MODEL = 'accounts.User'
