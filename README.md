@@ -1,8 +1,34 @@
+<div style="margin-bottom: -38px;"> 
+
+![Code Coverage Badge](https://img.shields.io/badge/Coverage-96.00%25-brightgreen?logo=pytest&logoColor=white)
+![Swagger Badge](https://img.shields.io/badge/Swagger-used-8A2BE2?logo=swagger&logoColor=white)
+![DRF Badge](https://img.shields.io/badge/DRF-used-1E90FF?logo=django&logoColor=white)
+![MySQL Badge](https://img.shields.io/badge/MySQL-used-orange?logo=mysql&logoColor=white)
+![API Version Badge](https://img.shields.io/badge/API%20Version-1.0.0-brightgreen)
+
+</div>
+
 # backend-pre-task
 
 키즈노트 BE개발 사전과제 repository입니다.
 ***
 
+### 주요 버전
+* Python: `3.9.3`
+* Django: `3.2.20`
+* Django REST Framework: `3.14.0`
+* DBMS: MySQL (ver. `8.0.27`)
+
+<p style="display: inline-block; vertical-align: middle;">현재 code coverage는</p> 
+<img alt="Static Badge" src="https://img.shields.io/badge/Coverage-96.00%25-brightgreen" style="vertical-align: middle;">
+<p style="display: inline-block; vertical-align: middle;">입니다.</p>
+
+***
+
+### backend-pre-task/backend/README.md
+* [바로가기](./backend/README.md)
+
+***
 
 ## BE 개발자 사전 과제
 ```text
