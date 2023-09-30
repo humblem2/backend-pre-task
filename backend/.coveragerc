@@ -1,0 +1,23 @@
+[run]
+source =
+    ./api
+    ./apps
+
+[report]
+omit =
+    */migrations/*
+    */tests/*
+    */__init__.py
+    */tests.py
+    */apps.py
+    conf/settings/*
+    conf/asgi.py
+    conf/urls.py
+    conf/wsgi.py
+    manage.py
+sort = Name
+fail_under = 50
+
+[html]
+directory = ../.resources/coverage_reports
+
