@@ -1,7 +1,7 @@
 # production settings
-from decouple import Config, RepositoryEnv
-
 from .base import *
+
+from decouple import Config, RepositoryEnv
 
 env_file = str(BASE_DIR / ".env.development")
 config = Config(RepositoryEnv(env_file))

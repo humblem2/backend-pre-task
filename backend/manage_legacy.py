@@ -3,22 +3,12 @@
 import os
 import sys
 
-import pymysql
-from decouple import config
-
-
-def install_pymysql_as_mysqldb():
-    """
-    PyMySQL을 MySQLdb처럼 사용하기 위한 설정
-    """
-    pymysql.install_as_MySQLdb()
-
-
-install_pymysql_as_mysqldb()
+from manage import install_pymysql_as_mysqldb
 
 
 def main():
     """Run administrative tasks."""
+    install_pymysql_as_mysqldb()
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'conf.settings')
     try:
         from django.core.management import execute_from_command_line
