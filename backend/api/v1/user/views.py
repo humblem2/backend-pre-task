@@ -25,6 +25,7 @@ class LoginView(generics.GenericAPIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
+        # `디시리얼라이징` 후 `유효성검사`
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 

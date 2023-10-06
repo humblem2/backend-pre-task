@@ -156,6 +156,8 @@ python manage.py createsuperuser
 > > * 값은 다음 중 하나로 설정
 > >   * development: 개발환경
 > >   * production: 운영환경
+> > * manage.py 명령 모듈 수정되어서 `python manage.py runserver` 명령어로 실행가능
+> > * `개발/운영 전용 settings 파이썬 설정파일`을 옵션으로 수동 주입하여 실행하고 싶다면 legacy_manage.py 명령 모듈 사용
 > ```bash
 > ENVIRONMENT=development
 > ```
@@ -172,14 +174,13 @@ python manage.py createsuperuser
 ### Pycharm > Run Configurations 설정
 > * 추가
 > ```bash
-> ;DJANGO_SETTINGS_MODULE=conf.settings.development
+> PYTHONUNBUFFERED=1;DJANGO_SETTINGS_MODULE=conf.settings.development;PYDEVD_USE_CYTHON=NO
 > ```
 > * Django Server
 > > <img src="../.resources/assets/파이참 Django Server 의 Run Configurations 설정 .png" alt="image-description" width="650" style="border: 2px solid #555; border-radius: 5px;"/>
 
-### Pycharm > Debugger 이슈
+### Pycharm > Debugger 이슈 (`FIXED`)
 > * `2023-09-29` 현재 `Pycharm`에서 `Django`를 `Debug` 모드로 실행시키면 `Django`의 `runserver`가 `Debug` 모드로 실행되지 않는 이슈가 있음
-> * FIXED. 
 > > * [해결방법 정리 #13](https://github.com/humblem2/backend-pre-task/issues/13) 
 
 ### (`@deprecated`) Runserver (수동 settings파일 주입 방식)
