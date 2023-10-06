@@ -20,7 +20,9 @@
 * DBMS: MySQL (ver. `8.0.27`)
 
 <p style="display: inline-block; vertical-align: middle;">현재 code coverage는</p> 
-<img alt="Static Badge" src="https://img.shields.io/badge/Coverage-96.00%25-brightgreen" style="vertical-align: middle;">
+
+  <img alt="Static Badge" src="https://img.shields.io/badge/Coverage-96.00%25-brightgreen" style="vertical-align: middle;">
+
 <p style="display: inline-block; vertical-align: middle;">입니다.</p>
 
 ***

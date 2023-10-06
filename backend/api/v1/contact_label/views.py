@@ -25,9 +25,9 @@ class ContactLabelViewSet(viewsets.ModelViewSet):
     queryset = m.ContactLabel.objects.all()
     pagination_class = pn.DefaultContactLabelPagination
     serializer_class = cls.ContactLabelSerializer
-    permission_classes = [IsAuthenticated, pm.IsOwnerOfContactLabel]
     authentication_classes = [JWTAuthentication]
-    
+    permission_classes = [IsAuthenticated, pm.IsOwnerOfContactLabel]
+
     def get_queryset(self):
         """로그인 유저의 연락처-라벨 매핑을 반환"""
         if not self.request.user.is_authenticated:
