@@ -1,4 +1,4 @@
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets, mixins, exceptions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
@@ -50,7 +50,7 @@ class ContactViewSet(viewsets.ModelViewSet):
 
 
 class LabelContactsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
-    """특정 라벨에 대응되는 `연락처 리스트`"""
+    """`특정 라벨`에 대응되는 `연락처 리스트`"""
 
     queryset = m.Contact.objects.all()
     serializer_class = cs.ContactListSerializer
@@ -65,9 +65,12 @@ class LabelContactsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
         queryset = m.Contact.objects.filter(user=self.request.user)
 
-        label_id = self.request.query_params.get('label', None)
-        if label_id:
-            contact_ids = m.ContactLabel.objects.filter(label=label_id).values_list('contact', flat=True)
-            queryset = queryset.filter(id__in=contact_ids)
+        label_id = self.kwargs.get('label_id', None)
+        if not label_id:
+            raise exceptions.ValidationError("label_id is required in the path.")
+
+        contact_ids = m.ContactLabel.objects.filter(label=label_id).values_list('contact', flat=True)
+        queryset = queryset.filter(id__in=contact_ids)
+
         return queryset
 
