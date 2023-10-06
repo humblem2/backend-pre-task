@@ -16,5 +16,5 @@ __pycache__/
 *.env.production
 
 # test
-.coverage
+backend/.coverage
 .pytest_cache/
