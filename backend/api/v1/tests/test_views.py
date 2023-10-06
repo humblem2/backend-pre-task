@@ -46,7 +46,9 @@ class TestAuthentication:
         returned_payload = jwt.decode(response.data['access_token'], secret_key, algorithms=["HS256"])
 
         # 직접 생성한 토큰의 페이로드를 디코드
-        expected_payload = jwt.decode(str(RefreshToken.for_user(test_user).access_token), secret_key, algorithms=["HS256"])
+        expected_payload = jwt.decode(str(RefreshToken.for_user(test_user).access_token),
+                                      secret_key,
+                                      algorithms=["HS256"])
 
         assert response.status_code == 200
 
@@ -277,14 +279,38 @@ class TestContactLabelAPI:
 class TestLabelContactsAPI:
     """LabelContactsViewSet API에 대한 테스트"""
 
+    @pytest.mark.django_db
     def test_contact_list_with_label(self, authenticated_api_client: APIClient, test_contact_of_user: ContactLabel,
-                                     test_label_of_user: Label):
+                                     test_label_of_user: Label, test_contact_label: ContactLabel):
         """특정 라벨에 해당하는 연락처 목록을 반환하는 API 검증"""
+
+        # API 호출을 통해 해당 라벨에 대한 연락처리스트 조회
         response = authenticated_api_client.get(f"/api/labels/{test_label_of_user.id}/contacts/")
         assert response.status_code == status.HTTP_200_OK
-        assert any(contact['id'] == test_contact_of_user.id for contact in response.data['results'])
+        assert any(contact['id'] == test_contact_label.contact.id for contact in response.data['results'])
+
+        # contacts에 반환된 연락처들이 있는지 확인
+        contacts = response.data['results']
+        assert contacts is not None and len(contacts) > 0
+
+        # test_contact_of_user의 ID가 contacts 목록에 있는지 확인
+        assert any(contact['id'] == test_contact_of_user.id for contact in contacts)
 
     def test_contact_list_with_label_unauthenticated(self, client: APIClient, test_label_of_user: Label):
-        """비인증 상태에서 특정 라벨에 해당하는 연락처 목록을 반환하는 API 접근 시도 검증"""
+        """`비인증 회원`이 특정 라벨에 해당하는 연락처 목록을 반환하는 API 접근 시도 검증"""
         response = client.get(f"/api/labels/{test_label_of_user.id}/contacts/")
         assert response.status_code == status.HTTP_401_UNAUTHORIZED
+
+    def test_contact_list_without_label_id(self, authenticated_api_client: APIClient):
+        """label_id가 없는경우 API 응답 검증"""
+        response = authenticated_api_client.get("/api/labels//contacts/")
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+
+        response = authenticated_api_client.get("/api/labels/contacts/")
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+
+    def test_contact_list_with_empty_label(self, authenticated_api_client: APIClient, test_label_of_user: Label):
+        """특정 라벨에 연락처가 매핑되지 않은 경우의 API 응답 검증"""
+        response = authenticated_api_client.get(f"/api/labels/{test_label_of_user.id}/contacts/")
+        assert response.status_code == status.HTTP_200_OK
+        assert len(response.data['results']) == 0
