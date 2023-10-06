@@ -25,6 +25,9 @@ class ContactViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """@overide 로그인 유저의 연락처 및 정렬"""
 
+        if not self.request.user.is_authenticated:
+            return m.Contact.objects.none()
+
         queryset = m.Contact.objects.all()
         ordering = self.request.query_params.get('ordering', None)
 
@@ -59,6 +62,9 @@ class LabelContactsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
     def get_queryset(self):
         """@overide URL에서 `label` 쿼리 파라미터를 기반으로 특정 라벨에 해당하는 연락처리스트를 반환"""
+
+        if not self.request.user.is_authenticated:
+            return m.Contact.objects.none()
 
         queryset = m.Contact.objects.filter(user=self.request.user)
 
